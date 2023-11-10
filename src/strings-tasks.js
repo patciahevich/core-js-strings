@@ -72,7 +72,7 @@ function concatenateStrings(value1, value2) {
  *   getFirstChar('') => ''
  */
 function getFirstChar(value) {
-  return value[0] || '';
+  return value.charAt(0);
 }
 
 /**
@@ -134,13 +134,10 @@ function removeTrailingWhitespaces(value) {
  *   repeatString('abc', -2) => ''
  */
 function repeatString(str, times) {
-  let count = 0;
-  const arr = [];
-  while (count < times) {
-    arr.push(str);
-    count += 1;
+  if (times > 0) {
+    return str.repeat(times);
   }
-  return arr.join('') || '';
+  return '';
 }
 
 /**
@@ -197,7 +194,7 @@ function removeLastOccurrences(str, value) {
  */
 function sumOfCodes(str) {
   if (str) {
-    const arr = str.split('').map((item) => item.codePointAt(0));
+    const arr = str.split('').map((item) => item.charCodeAt(0));
     return arr.reduce((sum, item) => sum + item);
   }
   return 0;
@@ -215,7 +212,7 @@ function sumOfCodes(str) {
  *   startsWith('Hello World', 'Hello') => true
  */
 function startsWith(str, substr) {
-  return str.indexOf(substr) === 0;
+  return str.startsWith(substr);
 }
 
 /**
@@ -230,8 +227,7 @@ function startsWith(str, substr) {
  *   endsWith('Hello World', 'Hello') => false
  */
 function endsWith(str, substr) {
-  const value = str.slice(str.lastIndexOf(substr));
-  return value === substr;
+  return str.endsWith(substr);
 }
 
 /**
@@ -248,15 +244,9 @@ function endsWith(str, substr) {
  *   formatTime(0, 0) => "00:00"
  */
 function formatTime(minutes, seconds) {
-  let min = minutes;
-  let sec = seconds;
-  if (min < 10) {
-    min = `0${min}`;
-  }
-  if (sec < 10) {
-    sec = `0${sec}`;
-  }
-  return `${min}:${sec}`;
+  return `${minutes.toString().padStart(2, '0')}:${seconds
+    .toString()
+    .padStart(2, '0')}`;
 }
 
 /**
